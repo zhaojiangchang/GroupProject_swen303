@@ -17,7 +17,7 @@ team = team_list.slice();
 return team;
 }
 
-function team_info(name, coun, win, lost, venue, home, away, rate, final_score, goal_percentage, ranking, final_series){
+function team_info(name, coun, win, lost, venue, home, away, rate, final_score, ranking, final_series){
 	this.name = name
 	this.coun = coun
 	this.venue = venue
@@ -27,7 +27,6 @@ function team_info(name, coun, win, lost, venue, home, away, rate, final_score, 
 	this.away = away
 	this.win_rate = rate
 	this.regular_final_score = final_score
-	this.goal_percentage = goal_percentage
 	this.ranking = ranking
 	this.final_series = final_series
 }
@@ -74,7 +73,7 @@ function final_games(home_or_away, name, home_score, rival_score, diff, lost_or_
 function init_team_list() {
 	var i = 0
 	for(i = 0; i < team_name_list.length; i++)
-	{	
+	{
 		var name = team_name_list[i].slice(0, team_name_list[i].indexOf(","))
 		var coun = team_name_list[i].slice(team_name_list[i].indexOf(",") + 1, team_name_list[i].length)
 		team_list[i] = new team_info(name,coun, 0, 0, "")
@@ -113,7 +112,7 @@ function init_home(data, team_info){
 }
 
 function count_per(team_info){
-	_count_per_home(team_info.home)	
+	_count_per_home(team_info.home)
 	_count_per_away(team_info.away)
 	_count_win_rate(team_info, team_info.home.win_percentage, team_info.away.win_percentage)
 }
@@ -208,7 +207,7 @@ function init_result(data, ho_aw, flag){
 		var rival_score = parseInt(data.Score.slice(0, 2))
 		var name = data.HomeTeam
 		var lost_or_win = ""
-	
+
 		if(away_score > rival_score){
 			var diff = away_score - rival_score
 			var lost_or_win = "win"
@@ -322,7 +321,6 @@ function init_basic_info(data){
 		cal_win(team_list[i])
 		init_venues(data)
 		init_final_score(team_list[i])
-		init_goal_percentage(team_list[i])
 	}
 	init_regular_ranking(team_list)
 	init_round_score(team_list)
@@ -331,15 +329,6 @@ function init_basic_info(data){
 	}
 }
 
-
-
-function init_goal_percentage(team_info){
-	var total_goal_num = 0
-	var total_conceded_num = 0
-	total_goal_num = _home_total_gnum(team_info.home) + _away_total_gnum(team_info.away)
-	total_conceded_num = _home_total_cnum(team_info.home) + _away_total_cnum(team_info.away)
-	team_info.goal_percentage = ((total_goal_num / total_conceded_num) * 100).toFixed(2)
-}
 
 
 function _home_total_gnum(home){
@@ -420,7 +409,7 @@ function init_regular_ranking(team_list){
 
 function init_round_score(team_list){
 	var i = 0
-	
+
 	for(i = 0; i < team_list.length; i++){
 		_init_round_score(team_list[i])
 	}
@@ -520,7 +509,7 @@ function _sort(team_lt){
 }
 
 function init_final_series(team_info){
-		
+
 	if(team_info.ranking > 4){
 		return
 	}
