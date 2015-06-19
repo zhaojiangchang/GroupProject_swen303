@@ -25,10 +25,12 @@ function team_name_win(name){
 	this.win_information = new Array();
 }
 
-function win_info(year, home, away){
+function win_info(year, home_name, home_percentage, away_name, away_percentage){
 	this.year = year;
-	this.home_win = home;
-	this.away_win = away;
+	this.home_name = home_name;
+	this.home_percentage = home_percentage;
+	this.away_name = away_name;
+	this.away_percentage = away_percentage;
 }
 
 function team_win_info(){
@@ -48,7 +50,7 @@ function team_win_info(){
 			var j = 0;
 			for (j = 0; j < team_win.length; j++){
 				if (team_name == team_win[j].name){
-					team_win[j].win_information.push(new win_info(year, home_win, away_win));
+					team_win[j].win_information.push(new win_info(year, "Home Win", home_win, "Away Win", away_win));
 				}
 			}
 		}
@@ -56,4 +58,44 @@ function team_win_info(){
 }
 
 
+function drawStackedBarchart(d){
+	var da;
+	var index = 0;
+	console.log(d);
+	for (index = 0; index < team_win.length; index++){
+		if (team_win[index].name == d){
+			console.log("found");
+			da = team_win[index].win_information;
+			console.log(da);
+			break;
+		}
+	}
+	var sample_data = [];
 
+	for(var h in da){
+		var item = da[h];
+
+		sample_data.push({
+			"year": item.year,
+			"name": item.home_name,
+			"percentage": item.home_percentage,
+		});
+
+		sample_data.push({
+			"year": item.year,
+			"name": item.away_name,
+			"percentage": item.away_percentage,
+		});
+	}
+
+	var visualization = d3plus.viz()
+	.container("#stackedBarchart")  // container DIV to hold the visualization
+	.data(sample_data)  // data to use with the visualization
+	.type("bar")    // visualization type
+	.id("name")         // key for which our data is unique on
+	.x({"stacked": true, "value": "percentage"})         // key for x-axis
+	.y("year")        // key for y-axis
+	.time("year")
+	.draw()             // finally, draw the visualization!
+
+};

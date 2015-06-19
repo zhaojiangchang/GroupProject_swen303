@@ -123,9 +123,8 @@ function myLadderFunction(){
 	}
 	else{
 		console.log("Years_teams_length:" + years_teams.length);
-//		team_rank_info();
 		team_win_info();
-		createStacked();
+		drawStackedBarchart("Central Pulse");
 	}
 }
 

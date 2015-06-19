@@ -399,25 +399,22 @@ table tr td {
 
 
 
-
-
-
-
-
-#stackedBarchart h4 {
+#StackedHeader h4{
 	text-align: center;
 }
 
-.axis path, .axis line {
-	fill: none;
-	stroke: #000;
-	shape-rendering: crispEdges;
-}
-
-.bar {
-	fill: steelblue;
-}
-
-.x.axis path {
-	display: none;
+select {
+	font-size: 15px;
+	font-family: ubuntu;
+	border: 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: #0088cc url(Images/arrow.png) no-repeat 90% center;
+	width: 100px;
+	text-indent: 0.01px;
+	text-overflow: "";
+	color: #FFF;
+	border-radius: 15px;
+	padding: 5px;
+	box-shadow: inset 0 0 5px rgba(000, 000, 000, 0.5)
 }
