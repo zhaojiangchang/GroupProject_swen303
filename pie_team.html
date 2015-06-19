@@ -1,0 +1,64 @@
+<html>
+<head>
+<meta charset="utf-8">
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"
+	charset="utf-8"></script>
+<script src="teams.js"></script>
+<script type="text/javascript">
+    </script>
+<style type="text/css">
+select {
+	font-size: 15px;
+	font-family: ubuntu;
+	border: 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: #0088cc url(Images/arrow.png) no-repeat 90% center;
+	width: 100px;
+	text-indent: 0.01px;
+	text-overflow: "";
+	color: #FFF;
+	border-radius: 15px;
+	padding: 5px;
+	box-shadow: inset 0 0 5px rgba(000, 000, 000, 0.5)
+}
+
+.pie {
+	display: inline-block;
+}
+</style>
+</head>
+<body>
+	<div>
+		<select>
+			<option id="team" value=1>Central Pulse</option>
+			<option id="team" value=2>Northern Mystics</option>
+			<option id="team" value=3>Waikato Bay of Plenty Magic</option>
+			<option id="team" value=4>Southern Steel</option>
+			<option id="team" value=5>Canterbury Tactix</option>
+			<option id="team" value=6>New South Wales Swifts</option>
+			<option id="team" value=7>Adelaide Thunderbirds</option>
+			<option id="team" value=8>Melbourne Vixens</option>
+			<option id="team" value=9>West Coast Fever</option>
+			<option id="team" value=10>Queensland Firebirds</option>
+		</select> <select>
+			<option id="year" value=2008>2008</option>
+			<option id="year" value=2009>2009</option>
+			<option id="year" value=2010>2010</option>
+			<option id="year" value=2011>2011</option>
+			<option id="year" value=2012>2012</option>
+			<option id="year" value=2013>2013</option>
+		</select>
+	</div>
+	<div>
+		<br>
+	</div>
+	<script type="text/javascript" src = "pie_team.js"></script>
+
+	<div class="pie" id="piechart" style="width: 300px; height: 250px;"></div>
+	<div class="pie" id="piechart_2" style="width: 300px; height: 250px;"></div>
+	<div class="pie" id="piechart_3" style="width: 300px; height: 250px;"></div>
+
+</body>
+</html>
