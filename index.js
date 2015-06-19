@@ -208,3 +208,60 @@ function ladder_table(year) {
               .attr("font-size", "15")
               .attr("fill", "white")
       }
+      function initial(){
+    	  svg_T.append("rect")
+    	       .attr("x", 0)
+    	       .attr("y", 0)
+    	       .attr("width",width)
+    	       .attr("height",50)
+    	       .attr("fill","#191B25");
+
+    	  svg_T.append("text")
+    	        .style("font-weight", "bold")
+    	        .attr("x", 20)
+    	        .attr("y", 20)
+    	        .text("Ranking")
+    	        .attr("font-size", "15")
+    	        .attr("fill", "white");
+
+    	    svg_T.append("text")
+    	        .style("font-weight", "bold")
+    	        .attr("x", width/6)
+    	        .attr("y", 20)
+    	        .text("Country")
+    	        .attr("font-size", "15")
+    	        .attr("fill", "white");
+
+    	  svg_T.append("text")
+    	        .style("font-weight", "bold")
+    	        .attr("x", width/2 - 100)
+    	        .attr("y", 20)
+    	        .text("Team Name")
+    	        .attr("font-size", "15")
+    	        .attr("fill", "white");
+
+    	  svg_T.append("text")
+    	        .style("font-weight", "bold")
+    	        .attr("x", (width/5)*3 +50)
+    	        .attr("y", 20)
+    	        .text("Win")
+    	        .attr("font-size", "15")
+    	        .attr("fill", "white");
+
+    	  svg_T.append("text")
+    	        .style("font-weight", "bold")
+    	        .attr("x", (width / 5)*4)
+    	        .attr("y", 20)
+    	        .text("Lost")
+    	        .attr("font-size", "15")
+    	        .attr("fill", "white");
+
+    	  svg_T.append("text")
+    	        .style("font-weight", "bold")
+    	        .attr("x", width - 50)
+    	        .attr("y", 20)
+    	        .text("Pts")
+    	        .attr("font-size", "15")
+    	        .attr("fill", "white");
+
+    	 }
