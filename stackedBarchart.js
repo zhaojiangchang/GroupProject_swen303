@@ -1,5 +1,4 @@
 function createStacked(){
-	console.log("!!!!!!!");
 
 	var margin = {top: 30, right: 20, bottom: 30, left: 160},
 	width = 760 - margin.left - margin.right,
@@ -27,6 +26,9 @@ function createStacked(){
 	.attr("height", height + margin.top + margin.bottom)
 	.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	console.log("@@@@@@")
+	console.log(team_win);
 
 	d3.csv("data.csv", function(error, data) {
 		if (error) throw error;
