@@ -1,11 +1,11 @@
 function createStacked(){
 
-	var margin = {top: 30, right: 20, bottom: 30, left: 160},
-	width = 760 - margin.left - margin.right,
+	var margin = {top: 30, right: 0, bottom: 30, left: 210},
+	width = 500,
 	height = 450 - margin.top - margin.bottom;
 
 	var x = d3.scale.ordinal()
-	.rangeRoundBands([0, width], .3);
+	.rangeRoundBands([0, width], .4);
 
 	var y = d3.scale.linear()
 	.rangeRound([height, 0]);
@@ -27,8 +27,18 @@ function createStacked(){
 	.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+
+
+
+
 	console.log("@@@@@@")
 	console.log(team_win);
+
+
+
+
+
+
 
 	d3.csv("data.csv", function(error, data) {
 		if (error) throw error;
@@ -59,7 +69,7 @@ function createStacked(){
 		.attr("y", 6)
 		.attr("dy", ".71em")
 		.style("text-anchor", "end")
-		.text("# Win Matches");
+		.text("Percentage of Win");
 
 		var state = svg.selectAll(".state")
 		.data(data)
