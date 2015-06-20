@@ -39,7 +39,6 @@
         <h2>Teams</h2>
       </div>
        <div id = "top">
-	       <h4>Select Team</h4>
 	       <select>
 			<option id="team" value=1>Central Pulse</option>
 			<option id="team" value=2>Northern Mystics</option>
@@ -53,10 +52,11 @@
 			<option id="team" value=10>Queensland Firebirds</option>
 		</select>
       </div>
-       <div id="StackedHeader">
-  	  <h4>The Percentage of Win Between 2008 and 2013</h4>
+       <div id="stackedHeader">
+  	  <h4>The Win Percentage Between 2008 and 2013</h4>
   	  </div>
   	   <div id="stackedBarchart"></div>
+
       <div id="main">
 		<iframe src="pie_team.html" frameborder=0 height=360 width=1850 seamless=seamless scrolling=no></iframe>
   	  </div>
@@ -131,7 +131,6 @@ d3.selectAll("#team")
 
 teamPageRd =true;
 indexPageRd = false;
-createStacked();
 </script>
 
 
