@@ -1,6 +1,7 @@
 var years_teams;
 var teamInfo = new Array();
-
+var indexPageRd = false;
+var teamPageRd =false;
 //var j = 0;
 //console.log("aaa: " + years_teams.length);
 
@@ -114,14 +115,11 @@ function year_teams(year){
 }
 
 function myLadderFunction(){
-	console.log("team page read: "+teamPageRd);
-	console.log("index page read: "+indexPageRd);
-	console.log("Years_teams_length:" + years_teams.length);
 	if(indexPageRd){
 		initial();
 		ladder_table(year);
 	}
-	else{
+	else if(teamPageRd){
 		console.log("Years_teams_length:" + years_teams.length);
 		team_rank_info();
 		drawPicture("Central Pulse");

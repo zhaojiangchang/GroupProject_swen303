@@ -2,45 +2,144 @@
 <html>
 
 <head>
-  <title>ANZ Championship Statistics</title>
-  <link rel="stylesheet" type="text/css" href="style/style.css" />
+<title>ANZ Championship Statistics</title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"
+	charset="utf-8"></script>
+<script type="text/javascript" src="teams.js"></script>
+
+<script type="text/javascript" src="loadFiles.js"></script>
+<script
+	src='https://raw.github.com/documentcloud/underscore/87cac5bd057ceafd6f779b1df33de61ca21b5e1d/underscore.js'></script>
+<!--<script src='https://raw.github.com/michael/data/a38f5fd92a5490dc5ab6a2e95e88ecba2e644c71/data.js'></script>-->
+<script
+	src='https://raw.github.com/michael/data/fe65cb9ab32fbee59f14f44e17e186cf69ff16a7/data.js'></script>
+<script src='http://code.jquery.com/jquery-1.7.2.min.js'></script>
+<script
+	src='https://raw.github.com/michael/dance/96cb9a6384acce19202275c6dce9b7fbdac87763/dance.js'></script>
+
+<!-- Countries data -->
+<script src='countries.js'></script>
+<!-- Dance Performers -->
+<script src="country_barchart.js"></script>
+<style type="text/css">
+body {
+	font: 15px 'Helvetica Neue' Arial
+}
+
+#canvas {
+	margin-top: 20px;
+	width: 550px;
+	height: 350px;
+	background: #eee;
+	position: relative;
+	border-right: 60px solid #EEE;;
+}
+
+.bar {
+	-moz-transition-duration: 0.8s;
+	-webkit-transition-duration: 0.8s;
+	transition-duration: 0.8s;
+	position: absolute;
+	bottom: 0px;
+	background: steelblue;
+	opacity: 0.7;
+}
+
+.bar:hover {
+	opacity: 1.0;
+}
+
+.bar .label {
+	text-transform: uppercase;
+	position: absolute;
+	bottom: -25px;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+.bar .value {
+	font-weight: bold;
+	text-transform: uppercase;
+	position: absolute;
+	top: -25px;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+</style>
+
+<script>
+	$(function() {
+		var countries = new Data.Collection(countries_data);
+		window.barchart = new Barchart({});
+
+		barchart.update(countries, "gdp");
+
+		// Update
+		function update() {
+			var language = $('#language').val();
+			var query = {};
+			if (language)
+				query["languages"] = [ language ];
+			var items = countries.find(query);
+			barchart.update(items, $('#property').val());
+		}
+
+		$('#property').change(update);
+		$('#language').change(update);
+	});
+</script>
 </head>
 
-<body>
-  <div id="main">
-    <div id="header">
-      <div id="logo">
-        <a href = "index.html"><img src = "style/anz-netball-championships1.jpg" height = "75" width = "100"></a></img>
-        <div id="logo_text">
-          <!-- class="logo_colour", allows you to change the colour of the text -->
-          <h1><a href="index.html" class="logo_colour">ANZ Championship Stats</a></h1>
-        </div>
-      </div>
-      <div id="menubar">
-        <ul id="menu">
-          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li><a href="index.html">Home</a></li>
-          <li><a href="teams.html">Teams Stats</a></li>
-          <li  class="selected"><a href="country.html">Country Stats</a></li>
-          <li><a href="another_page.html">Policy</a></li>
-        </ul>
-      </div>
-    </div>
-    <div id="site_content">
-      <div id="content">
-        <h2>NZ vs. Australia</h2>
-        <div id = "barchart"><a href = "http://bl.ocks.org/NPashaP/9796212">Compare</a></div>
-         <div id="main">
-		<iframe src="scatter_country.html" frameborder=0 height=360 width=850 seamless=seamless scrolling=no></iframe>
-  	  </div>
-      </div>
-    </div>
-  </div>
-    <div id="footer">
-      <p><a href="index.html">Home</a> | <a href="teams.html">Teams Stats</a> | <a href="country.html">Country Stats</a> | <a href="another_page.html">Policy</a></p>
-      <p>Copyright </p>
-    </div>
-    <p>&nbsp;</p>
-  </div>
+<body onload="read_data()">
+	<div id="main">
+		<div id="header">
+			<div id="logo">
+				<a href="index.html"><img
+					src="style/anz-netball-championships1.jpg" height="75" width="100"></a></img>
+				<div id="logo_text">
+					<!-- class="logo_colour", allows you to change the colour of the text -->
+					<h1>
+						<a href="index.html" class="logo_colour">ANZ Championship
+							Stats</a>
+					</h1>
+				</div>
+			</div>
+			<div id="menubar">
+				<ul id="menu">
+					<!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+					<li><a href="index.html">Home</a></li>
+					<li><a href="teams.html">Teams Stats</a></li>
+					<li class="selected"><a href="country.html">Country Stats</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="site_content">
+			<div id="content">
+				<h2>NZ vs. Australia</h2>
+
+				<div id='container'>
+					<select id="property">
+						<option id="country" value="nz">New Zealand</option>
+						<option id="country" value="au">Australia</option>
+					</select> <select id = 'tm'></select>
+					<div id='canvas'></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<p>
+			<a href="index.html">Home</a> | <a href="teams.html">Teams Stats</a>
+			| <a href="country.html">Country Stats</a>
+		</p>
+		<p>Copyright</p>
+	</div>
+	<p>&nbsp;</p>
+	</div>
+	<script type="text/javascript" src="country.js"></script>
 </body>
 </html>
