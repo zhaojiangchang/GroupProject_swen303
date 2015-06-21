@@ -16,7 +16,7 @@ var teamInfo = new Array();
 function read_data() {
 	years_teams =  new Array();
 	var remaining = 7;
-	var years = new Array("2008","2009","2010","2011","2012","2013","2014");
+	var years = new Array(2008,2009,2010,2011,2012,2013,2014);
 	var count = 0;
 
 	d3.csv("2008" + "_new_Table1.csv", function(data) {
@@ -26,7 +26,7 @@ function read_data() {
 			return a.ranking - b.ranking
 		})
 		if(!--remaining) myLadderFunction();
-		years_teams[count++] = new year_teams("2008");
+		years_teams[count++] = new year_teams(2008);
 	});
 
 	d3.csv("2009" + "_new_Table1.csv", function(data) {
@@ -36,7 +36,7 @@ function read_data() {
 			return a.ranking - b.ranking
 		})
 		if(!--remaining) myLadderFunction();
-		years_teams[count++] = new year_teams("2009");
+		years_teams[count++] = new year_teams(2009);
 	});
 
 	d3.csv("2010" + "_new_Table1.csv", function(data) {
@@ -46,7 +46,7 @@ function read_data() {
 			return a.ranking - b.ranking
 		})
 		if(!--remaining) myLadderFunction();
-		years_teams[count++] = new year_teams("2010");
+		years_teams[count++] = new year_teams(2010);
 	});
 
 	d3.csv("2011" + "_new_Table1.csv", function(data) {
@@ -56,7 +56,7 @@ function read_data() {
 			return a.ranking - b.ranking
 		})
 		if(!--remaining) myLadderFunction();
-		years_teams[count++] = new year_teams("2011");
+		years_teams[count++] = new year_teams(2011);
 	});
 
 	d3.csv("2012" + "_new_Table1.csv", function(data) {
@@ -66,7 +66,7 @@ function read_data() {
 			return a.ranking - b.ranking
 		})
 		if(!--remaining) myLadderFunction();
-		years_teams[count++] = new year_teams("2012");
+		years_teams[count++] = new year_teams(2012);
 	});
 
 	d3.csv("2013" + "_new_Table1.csv", function(data) {
@@ -76,7 +76,7 @@ function read_data() {
 			return a.ranking - b.ranking
 		})
 		if(!--remaining) myLadderFunction();
-		years_teams[count++] = new year_teams("2013");
+		years_teams[count++] = new year_teams(2013);
 	});
 
 	d3.csv("2014" + "_new_Table1.csv", function(data) {
@@ -86,7 +86,7 @@ function read_data() {
 			return a.ranking - b.ranking
 		})
 		if(!--remaining) myLadderFunction();
-		years_teams[count++] = new year_teams("2014");
+		years_teams[count++] = new year_teams(2014);
 	});
 }
 function year_teams(year){
@@ -123,8 +123,11 @@ function myLadderFunction(){
 	}
 	else{
 		console.log("Years_teams_length:" + years_teams.length);
+		team_rank_info();
+		drawPicture("Central Pulse");
 		team_win_info();
 		drawStackedBarchart("Central Pulse");
+
 	}
 }
 

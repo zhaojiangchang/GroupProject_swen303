@@ -1,3 +1,14 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script src="http://www.d3plus.org/js/d3.js"></script>
+<script src="http://www.d3plus.org/js/d3plus.js"></script>
+<script type = "text/javascript" src = "loadFiles.js"></script>
+
+
+<div id="viz"></div>
+
+<script>
 var team_name = Array("Central Pulse,New Zealand",
 		"Northern Mystics,New Zealand",
 		"Waikato Bay of Plenty Magic,New Zealand",
@@ -96,3 +107,29 @@ function drawStackedBarchart(d){
 	.draw()             // finally, draw the visualization!
 
 };
+
+
+
+
+
+
+
+  var sample_data = [
+    {"value": 100, "weight": .45, "name": "alpha", "group": "group 1"},
+    {"value": 70, "weight": .60, "name": "beta", "group": "group 2"},
+    {"value": 40, "weight": -.2, "name": "gamma", "group": "group 2"},
+    {"value": 15, "weight": .1, "name": "delta", "group": "group 2"},
+    {"value": 5, "weight": -.43, "name": "epsilon", "group": "group 1"},
+    {"value": 1, "weight": 0, "name": "zeta", "group": "group 1"}
+  ]
+
+  var visualization = d3plus.viz()
+    .container("#viz")
+    .data(sample_data)
+    .type("scatter")
+    .id(["group","name"])
+    .x("value")
+    .y("weight")
+    .draw()
+
+</script>

@@ -25,7 +25,7 @@ function ladder_table(year) {
               .on("mouseover", function(d) {
                   d3.select(this)
                   .attr("fill", function(d) {
-                      if(d.ranking === 1){
+                      if(d.ranking < 5){
                         return "#ED008C"
                       }
                       else{

@@ -2,72 +2,88 @@
 <html>
 
 <head>
-  <title>ANZ Championship Statistics</title>
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <link rel="stylesheet" type="text/css" href="style/style.css" />
-  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <script type="text/javascript" src = "teams.js"></script>
-  <script type = "text/javascript" src = "loadFiles.js"></script>
-    <script type="text/javascript" src = "team_rank.js"></script>
+<title>ANZ Championship Statistics</title>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"
+	charset="utf-8"></script>
+<script type="text/javascript" src="teams.js"></script>
+<script type="text/javascript" src="loadFiles.js"></script>
+<script type="text/javascript" src="team_rank.js"></script>
 <script src="http://www.d3plus.org/js/d3.js"></script>
 <script src="http://www.d3plus.org/js/d3plus.js"></script>
 
 </head>
 
-<body onload = "read_data()">
-  <div id="main">
-    <div id="header">
-      <div id="logo">
-        <a href = "index.html"><img src = "style/anz-netball-championships1.jpg" height = "75" width = "100"></a></img>
-        <div id="logo_text">
-          <!-- class="logo_colour", allows you to change the colour of the text -->
-          <h1><a href="index.html" class="logo_colour">ANZ Championship Stats</a></h1>
-        </div>
-      </div>
-      <div id="menubar">
-        <ul id="menu">
-          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li><a href="index.html">Home</a></li>
-          <li  class="selected"><a href="teams.html">Teams Stats</a></li>
-          <li><a href="country.html">Country Stats</a></li>
-          <li><a href="another_page.html">Policy</a></li>
-        </ul>
-      </div>
-    </div>
-    <div id="site_content">
-      <div id="content">
-        <h2>Teams</h2>
-      </div>
-       <div id = "top">
-	       <select>
-			<option id="team" value=1>Central Pulse</option>
-			<option id="team" value=2>Northern Mystics</option>
-			<option id="team" value=3>Waikato Bay of Plenty Magic</option>
-			<option id="team" value=4>Southern Steel</option>
-			<option id="team" value=5>Canterbury Tactix</option>
-			<option id="team" value=6>New South Wales Swifts</option>
-			<option id="team" value=7>Adelaide Thunderbirds</option>
-			<option id="team" value=8>Melbourne Vixens</option>
-			<option id="team" value=9>West Coast Fever</option>
-			<option id="team" value=10>Queensland Firebirds</option>
-		</select>
-      </div>
-       <div id="stackedHeader">
-  	  <h4>The Win Percentage Between 2008 and 2013</h4>
-  	   <div id="stackedBarchart"></div>
+<body onload="read_data()">
+	<div id="main">
+		<div id="header">
+			<div id="logo">
+				<a href="index.html"><img
+					src="style/anz-netball-championships1.jpg" height="75" width="100"></a></img>
+				<div id="logo_text">
+					<!-- class="logo_colour", allows you to change the colour of the text -->
+					<h1>
+						<a href="index.html" class="logo_colour">ANZ Championship
+							Stats</a>
+					</h1>
+				</div>
+			</div>
+			<div id="menubar">
+				<ul id="menu">
+					<!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+					<li><a href="index.html">Home</a></li>
+					<li class="selected"><a href="teams.html">Teams Stats</a></li>
+					<li><a href="country.html">Country Stats</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="site_content">
+			<div id="content">
+				<h2>Teams</h2>
+			</div>
+			<div id="top">
+				<select>
+					<option id="team" value=1>Central Pulse</option>
+					<option id="team" value=2>Northern Mystics</option>
+					<option id="team" value=3>Waikato Bay of Plenty Magic</option>
+					<option id="team" value=4>Southern Steel</option>
+					<option id="team" value=5>Canterbury Tactix</option>
+					<option id="team" value=6>New South Wales Swifts</option>
+					<option id="team" value=7>Adelaide Thunderbirds</option>
+					<option id="team" value=8>Melbourne Vixens</option>
+					<option id="team" value=9>West Coast Fever</option>
+					<option id="team" value=10>Queensland Firebirds</option>
+				</select>
+				<h4>
+					</br>
+				</h4>
+				<h4>Team Rank</h4>
+			</div>
+			<div id="scatter"></div>
+			<div id="stackedHeader">
+				<h4>
+					</br>
+				</h4>
+				<h4>The Win Percentage Between 2008 and 2013</h4>
+				<div id="stackedBarchart"></div>
 
-      <div id="main">
-		<iframe src="pie_team.html" frameborder=0 height=360 width=1850 seamless=seamless scrolling=no></iframe>
-  	  </div>
+				<div id="main">
+					<iframe src="pie_team.html" frameborder=0 height=360 width=1850
+						seamless=seamless scrolling=no></iframe>
+				</div>
 
-    </div>
-  </div>
-    <div id="footer">
-      <p><a href="index.html">Home</a> | <a href="teams.html">Teams Stats</a> | <a href="country.html">Country Stats</a> | <a href="another_page.html">Policy</a></p>
-      <p>Copyright </p>
-    </div>
-    <p>&nbsp;</p>
-  </div>
+			</div>
+		</div>
+		<div id="footer">
+			<p>
+				<a href="index.html">Home</a> | <a href="teams.html">Teams Stats</a>
+				| <a href="country.html">Country Stats</a>
+			</p>
+			<p>Copyright</p>
+		</div>
+		<p>&nbsp;</p>
+	</div>
 
 </body>
 
@@ -75,61 +91,70 @@
 <script src="team_win.js"></script>
 
 <script>
-teamPageRd =true;
-indexPageRd = false;
+	teamPageRd = true;
+	indexPageRd = false;
 </script>
 <script>
-var choose_team = "Central Pulse";
+	var choose_team = "Central Pulse";
 
-d3.selectAll("#team")
-		.on("click", function() {
-			var choice = d3.select(this).attr("value")
-			switch(choice){
-			case "1":
-				choose_team = "Central Pulse"
-					drawStackedBarchart(choose_team)
-					break;
-			case "2":
-				choose_team = "Northern Mystics"
-					drawStackedBarchart(choose_team)
-					break;
-			case "3":
-				choose_team = "Waikato Bay of Plenty Magic"
-					drawStackedBarchart(choose_team)
-					break;
-			case "4":
-				choose_team = "Southern Steel"
-					drawStackedBarchart(choose_team)
-					break;
-			case "5":
-				choose_team = "Canterbury Tactix"
-					drawStackedBarchart(choose_team)
-					break;
-			case "6":
-				choose_team = "New South Wales Swifts"
-					drawStackedBarchart(choose_team)
-					break
-			case "7":
-				choose_team = "Adelaide Thunderbirds"
-					drawStackedBarchart(choose_team)
-					break
-			case "8":
-				choose_team = "Melbourne Vixens"
-					drawStackedBarchart(choose_team)
-					break
-			case "9":
-				choose_team = "West Coast Fever"
-					drawStackedBarchart(choose_team)
-					break
-			case "10":
-				choose_team = "Queensland Firebirds"
-					drawStackedBarchart(choose_team)
-					break
-			}
-		})
+	d3.selectAll("#team").on("click", function() {
+		var choice = d3.select(this).attr("value")
+		switch (choice) {
+		case "1":
+			choose_team = "Central Pulse"
+			trans_scatter(choose_team)
+			drawStackedBarchart(choose_team)
+			break;
+		case "2":
+			choose_team = "Northern Mystics"
+			trans_scatter(choose_team)
+			drawStackedBarchart(choose_team)
+			break;
+		case "3":
+			choose_team = "Waikato Bay of Plenty Magic"
+			trans_scatter(choose_team)
+			drawStackedBarchart(choose_team)
+			break;
+		case "4":
+			choose_team = "Southern Steel"
+			trans_scatter(choose_team)
+			drawStackedBarchart(choose_team)
+			break;
+		case "5":
+			choose_team = "Canterbury Tactix"
+			trans_scatter(choose_team)
+			drawStackedBarchart(choose_team)
+			break;
+		case "6":
+			choose_team = "New South Wales Swifts"
+			trans_scatter(choose_team)
+			drawStackedBarchart(choose_team)
+			break
+		case "7":
+			choose_team = "Adelaide Thunderbirds"
+			trans_scatter(choose_team)
+			drawStackedBarchart(choose_team)
+			break
+		case "8":
+			choose_team = "Melbourne Vixens"
+			trans_scatter(choose_team)
+			drawStackedBarchart(choose_team)
+			break
+		case "9":
+			choose_team = "West Coast Fever"
+			trans_scatter(choose_team)
+			drawStackedBarchart(choose_team)
+			break
+		case "10":
+			choose_team = "Queensland Firebirds"
+			trans_scatter(choose_team)
+			drawStackedBarchart(choose_team)
+			break
+		}
+	})
 
-teamPageRd =true;
-indexPageRd = false;
+	teamPageRd = true;
+	indexPageRd = false;
 </script>
 
 
