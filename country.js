@@ -1,61 +1,185 @@
-var choose_country = "New Zealand"
-var choose_team = ""
-var team_name = Array("Central Pulse",
-				"Northern Mystics",
-				"Waikato Bay of Plenty Magic",
-				"Southern Steel",
-				"Canterbury Tactix",
-				"New South Wales Swifts",
-				"Adelaide Thunderbirds",
-				"Melbourne Vixens",
-				"West Coast Fever",
-		"Queensland Firebirds");
-set_team_selection(1);
-d3.selectAll("#country")
-.on("click", function() {
-	var choice = d3.select(this).attr("value")
-	switch(choice){
-	case "nz":
-		choose_country = "New Zealand"
-			set_team_selection(1)
-			break;
-	case "au":
-		choose_country = "Australia"
-			set_team_selection(6)
-			break;
-	}
-})
-
-function set_team_selection(index){
+var team_name = Array("Central Pulse,New Zealand",
+		"Northern Mystics,New Zealand",
+		"Waikato Bay of Plenty Magic,New Zealand",
+		"Southern Steel,New Zealand",
+		"Canterbury Tactix,New Zealand",
+		"New South Wales Swifts,Australia",
+		"Adelaide Thunderbirds,Australia",
+		"Melbourne Vixens,Australia",
+		"West Coast Fever,Australia",
+"Queensland Firebirds,Australia");
+set_team_selection();
+function set_team_selection(){
+	console.log(11)
 	while(document.getElementById("tm").firstChild)//remove old labels
 		document.getElementById("tm").removeChild(document.getElementById("tm").firstChild);
-	if(choose_country == "New Zealand"){
-		for(; index<=5; index++){
-			var newOption = document.createElement('option');
-			newOption.setAttribute("id", "team"+index);
-			newOption.value = index;
-			var i = index -1
-			newOption.innerHTML = team_name[i];
-			newOption.onclick  = function(){
-				choose_team = newOption.innerHTML;
-				console.log(choose_team+"  "+choose_country)
-			};
-			document.getElementById("tm").appendChild(newOption);
-		}
+	var index = 0;
+	for(; index<team_name.length; index++){
+		var newOption = document.createElement('option');
+		newOption.setAttribute("id", "team"+index);
+		newOption.value = index;
+		newOption.innerHTML = team_name[index];
+		newOption.onclick  = function(){
+			
+		};
+		document.getElementById("tm").appendChild(newOption);
 	}
-	if(choose_country == "Australia"){
-		for(; index<=10; index++){
-			var newOption = document.createElement('option');
-			newOption.setAttribute("id", "team"+index);
-			newOption.value = index;
-			var i = index -1
-			newOption.innerHTML = team_name[i];
-			newOption.onclick  = function(){
-				choose_team = team_name[i];
-				console.log(choose_team+"  "+choose_country)
+}
+var select = document.getElementById("tm");
+select.onchange = function(){
+	var name =this.options[this.selectedIndex].text.slice(0, this.options[this.selectedIndex].text.indexOf(","));
+	trans_scatter(name);
+	};
 
-			};
-			document.getElementById("tm").appendChild(newOption);
+
+var country_points = new Array();
+
+function init_country_points() {
+	var i = 0;
+	for(i = 0; i < team_name.length; i++){
+		var name = team_name[i].slice(0, team_name_list[i].indexOf(","));
+		var country = team_name[i].slice(team_name_list[i].indexOf(",")+1);
+		country_points[i] = new team_points(name, country);
+	}
+}
+
+function team_points(name, country){
+	this.name = name;
+	this.country = country;
+	this.team_information = new Array();
+}
+
+function match_info(year, match_vs_rival){
+	this.year = year;
+	this.match_vs_rival = match_vs_rival;
+}
+
+function country_points_info(){
+
+	init_country_points();
+	var i = 0;
+	for (i = 0; i < years_teams.length; i++){
+		var year = years_teams[i].year;
+		var index = 0;
+		for (index = 0; index < years_teams[i].teams.length; index++){
+			var team_name = years_teams[i].teams[index].name;
+			var  home_results_array=  years_teams[i].teams[index].home.result;
+			var  away_results_array=  years_teams[i].teams[index].away.result;
+			var home_vs_rival = checkTeams(years_teams[i].teams[index].coun,home_results_array)
+			var away_vs_rival = checkTeams(years_teams[i].teams[index].coun,away_results_array)
+			var match_vs_rival = [];
+			var m = 0;
+			var n = 0;
+			for(; m< home_vs_rival.length; m++){
+				match_vs_rival[n++] = home_vs_rival[m];
+			}
+			m = 0;
+			for(; m<away_vs_rival.length; m++){
+				match_vs_rival[n++] = away_vs_rival[m];
+			}
+			var j = 0;
+			for (j = 0; j < country_points.length; j++){
+				if (team_name == country_points[j].name){
+					country_points[j].team_information.push(new match_info(year, match_vs_rival));
+				}
+			}
 		}
 	}
 }
+
+function checkTeams(coun, results_teams){
+	var teams = [];
+	var i = 0;
+	var j = 0;
+	for(; i< results_teams.length; i++){
+		if(coun!==check_country(results_teams[i].rival_name) && parseInt(results_teams[i].round)<15){
+			teams[j++] = results_teams[i];
+		}
+	}
+	return teams;
+
+}
+function check_country(t_name){
+	var i = 0;
+	for(; i<team_name.length; i++){
+		var name = team_name[i].slice(0, team_name[i].indexOf(","));
+		if(t_name==name){
+			return team_name[i].slice(team_name[i].indexOf(",")+1);
+		}
+	}
+}
+function drawBarchart(d){
+	var da;
+	var index = 0;
+	console.log(d);
+	for (index = 0; index < country_points.length; index++){
+		if (country_points[index].name == d){
+			da = country_points[index].team_information;
+			break;
+		}
+	}
+	var sample_data = [];
+	for(var h in da){
+		var item = da[h];
+		var idx = 0;
+		for(; idx<item.match_vs_rival.length; idx++){
+			var percentage = item.match_vs_rival[idx].this_score/item.match_vs_rival[idx].rival_score;
+			sample_data.push({
+				"year": item.year,
+				"name": item.match_vs_rival[idx].rival_name,
+				"lost_or_win": item.match_vs_rival[idx].lost_or_win,
+				"Value>1 Win OR Value<1 Lost": percentage,
+			});
+		}
+
+	}
+	var visualization = d3plus.viz()
+	.container("#viz")
+	.data(sample_data)
+	.type("bar")
+	.id("name")
+	.x("year")
+	.y("Value>1 Win OR Value<1 Lost")
+	.draw()
+
+};
+
+function trans_scatter(d){
+	var da;
+	var index = 0;
+	for (index = 0; index < country_points.length; index++){
+		if (country_points[index].name == d){
+			da = country_points[index].team_information;
+			break;
+		}
+	}
+	var sample_data = [];
+	for(var h in da){
+		var item = da[h];
+		var idx = 0;
+		for(; idx<item.match_vs_rival.length; idx++){
+			var percentage = item.match_vs_rival[idx].this_score/item.match_vs_rival[idx].rival_score;
+			sample_data.push({
+				"year": item.year,
+				"name": item.match_vs_rival[idx].rival_name,
+				"Lost < 1 <<-->> Win > 1": percentage,
+			});
+		}
+
+	}
+
+	var visualization = d3plus.viz()
+	.container("#viz")
+	.data(sample_data)
+	.type("bar")
+	.id("name")
+	.x("year")
+	.y("Lost < 1 <<-->> Win > 1")
+	.draw()
+
+};
+
+
+
+
+

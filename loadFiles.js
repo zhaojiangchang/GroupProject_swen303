@@ -2,18 +2,8 @@ var years_teams;
 var teamInfo = new Array();
 var indexPageRd = false;
 var teamPageRd =false;
-//var j = 0;
-//console.log("aaa: " + years_teams.length);
+var countryPageRd = false;
 
-//for(j = 0; j<years_teams.length; j++){
-
-//  if(years_teams[j].year.localeCompare(year)){
-//   console.log("aaaaaaa")
-//   teamInfo = years.teams[j].teams
-// }
-// console.log("bbbbbb")
-
-//}s
 function read_data() {
 	years_teams =  new Array();
 	var remaining = 7;
@@ -120,12 +110,14 @@ function myLadderFunction(){
 		ladder_table(year);
 	}
 	else if(teamPageRd){
-		console.log("Years_teams_length:" + years_teams.length);
 		team_rank_info();
 		drawPicture("Central Pulse");
 		team_win_info();
 		drawStackedBarchart("Central Pulse");
-
+	}
+	else if(countryPageRd){
+		country_points_info();
+		drawBarchart("Central Pulse");
 	}
 }
 
