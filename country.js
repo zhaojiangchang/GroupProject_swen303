@@ -34,9 +34,11 @@ function set_team_selection(index){
 			var newOption = document.createElement('option');
 			newOption.setAttribute("id", "team"+index);
 			newOption.value = index;
-			newOption.innerHTML = team_name[index-1];
+			var i = index -1
+			newOption.innerHTML = team_name[i];
 			newOption.onclick  = function(){
-				choose_team = team_name[index-1];
+				choose_team = newOption.innerHTML;
+				console.log(choose_team+"  "+choose_country)
 			};
 			document.getElementById("tm").appendChild(newOption);
 		}
@@ -46,9 +48,11 @@ function set_team_selection(index){
 			var newOption = document.createElement('option');
 			newOption.setAttribute("id", "team"+index);
 			newOption.value = index;
-			newOption.innerHTML = team_name[index-1];
+			var i = index -1
+			newOption.innerHTML = team_name[i];
 			newOption.onclick  = function(){
-				choose_team = team_name[index-1];
+				choose_team = team_name[i];
+				console.log(choose_team+"  "+choose_country)
 
 			};
 			document.getElementById("tm").appendChild(newOption);

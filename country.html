@@ -7,91 +7,10 @@
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"
 	charset="utf-8"></script>
+	<script src="http://www.d3plus.org/js/d3.js"></script>
+<script src="http://www.d3plus.org/js/d3plus.js"></script>
 <script type="text/javascript" src="teams.js"></script>
-
 <script type="text/javascript" src="loadFiles.js"></script>
-<script
-	src='https://raw.github.com/documentcloud/underscore/87cac5bd057ceafd6f779b1df33de61ca21b5e1d/underscore.js'></script>
-<!--<script src='https://raw.github.com/michael/data/a38f5fd92a5490dc5ab6a2e95e88ecba2e644c71/data.js'></script>-->
-<script
-	src='https://raw.github.com/michael/data/fe65cb9ab32fbee59f14f44e17e186cf69ff16a7/data.js'></script>
-<script src='http://code.jquery.com/jquery-1.7.2.min.js'></script>
-<script
-	src='https://raw.github.com/michael/dance/96cb9a6384acce19202275c6dce9b7fbdac87763/dance.js'></script>
-
-<!-- Countries data -->
-<script src='countries.js'></script>
-<!-- Dance Performers -->
-<script src="country_barchart.js"></script>
-<style type="text/css">
-body {
-	font: 15px 'Helvetica Neue' Arial
-}
-
-#canvas {
-	margin-top: 20px;
-	width: 550px;
-	height: 350px;
-	background: #eee;
-	position: relative;
-	border-right: 60px solid #EEE;;
-}
-
-.bar {
-	-moz-transition-duration: 0.8s;
-	-webkit-transition-duration: 0.8s;
-	transition-duration: 0.8s;
-	position: absolute;
-	bottom: 0px;
-	background: steelblue;
-	opacity: 0.7;
-}
-
-.bar:hover {
-	opacity: 1.0;
-}
-
-.bar .label {
-	text-transform: uppercase;
-	position: absolute;
-	bottom: -25px;
-	left: 0;
-	right: 0;
-	text-align: center;
-}
-
-.bar .value {
-	font-weight: bold;
-	text-transform: uppercase;
-	position: absolute;
-	top: -25px;
-	left: 0;
-	right: 0;
-	text-align: center;
-}
-</style>
-
-<script>
-	$(function() {
-		var countries = new Data.Collection(countries_data);
-		window.barchart = new Barchart({});
-
-		barchart.update(countries, "gdp");
-
-		// Update
-		function update() {
-			var language = $('#language').val();
-			var query = {};
-			if (language)
-				query["languages"] = [ language ];
-			var items = countries.find(query);
-			barchart.update(items, $('#property').val());
-		}
-
-		$('#property').change(update);
-		$('#language').change(update);
-	});
-</script>
 </head>
 
 <body onload="read_data()">
@@ -126,8 +45,8 @@ body {
 						<option id="country" value="nz">New Zealand</option>
 						<option id="country" value="au">Australia</option>
 					</select> <select id = 'tm'></select>
-					<div id='canvas'></div>
 				</div>
+				<div id="viz"></div>
 			</div>
 		</div>
 	</div>
@@ -140,6 +59,37 @@ body {
 	</div>
 	<p>&nbsp;</p>
 	</div>
+	<script>
+
+  var data = [
+    {"year": 1991, "name":"alpha", "value": 15},
+    {"year": 1991, "name":"beta", "value": 10},
+    {"year": 1991, "name":"gamma", "value": 5},
+    {"year": 1991, "name":"delta", "value": 50},
+    {"year": 1992, "name":"alpha", "value": 20},
+    {"year": 1992, "name":"beta", "value": 10},
+    {"year": 1992, "name":"gamma", "value": 10},
+    {"year": 1992, "name":"delta", "value": 43},
+    {"year": 1993, "name":"alpha", "value": 30},
+    {"year": 1993, "name":"beta", "value": 40},
+    {"year": 1993, "name":"gamma", "value": 20},
+    {"year": 1993, "name":"delta", "value": 17},
+    {"year": 1994, "name":"alpha", "value": 60},
+    {"year": 1994, "name":"beta", "value": 60},
+    {"year": 1994, "name":"gamma", "value": 25},
+    {"year": 1994, "name":"delta", "value": 32}
+  ]
+
+  var visualization = d3plus.viz()
+    .container("#viz")
+    .data(data)
+    .type("bar")
+    .id("name")
+    .x("year")
+    .y("value")
+    .draw()
+
+</script>
 	<script type="text/javascript" src="country.js"></script>
 </body>
 </html>
