@@ -19,16 +19,13 @@ function set_team_selection(){
 		newOption.setAttribute("id", "team"+index);
 		newOption.value = index;
 		newOption.innerHTML = team_name[index];
-		newOption.onclick  = function(){
-			
-		};
 		document.getElementById("tm").appendChild(newOption);
 	}
 }
 var select = document.getElementById("tm");
 select.onchange = function(){
 	var name =this.options[this.selectedIndex].text.slice(0, this.options[this.selectedIndex].text.indexOf(","));
-	trans_scatter(name);
+	drawBarchart(name);
 	};
 
 
@@ -109,6 +106,7 @@ function check_country(t_name){
 	}
 }
 function drawBarchart(d){
+	document.getElementById("title").innerHTML = d +" vs "+ check_country(d) + " teams";
 	var da;
 	var index = 0;
 	console.log(d);
@@ -128,7 +126,7 @@ function drawBarchart(d){
 				"year": item.year,
 				"name": item.match_vs_rival[idx].rival_name,
 				"lost_or_win": item.match_vs_rival[idx].lost_or_win,
-				"Value>1 Win OR Value<1 Lost": percentage,
+				"My score : Rival score (%)": percentage,
 			});
 		}
 
@@ -139,47 +137,8 @@ function drawBarchart(d){
 	.type("bar")
 	.id("name")
 	.x("year")
-	.y("Value>1 Win OR Value<1 Lost")
+	.y("My score : Rival score (%)")
 	.draw()
 
 };
-
-function trans_scatter(d){
-	var da;
-	var index = 0;
-	for (index = 0; index < country_points.length; index++){
-		if (country_points[index].name == d){
-			da = country_points[index].team_information;
-			break;
-		}
-	}
-	var sample_data = [];
-	for(var h in da){
-		var item = da[h];
-		var idx = 0;
-		for(; idx<item.match_vs_rival.length; idx++){
-			var percentage = item.match_vs_rival[idx].this_score/item.match_vs_rival[idx].rival_score;
-			sample_data.push({
-				"year": item.year,
-				"name": item.match_vs_rival[idx].rival_name,
-				"Lost < 1 <<-->> Win > 1": percentage,
-			});
-		}
-
-	}
-
-	var visualization = d3plus.viz()
-	.container("#viz")
-	.data(sample_data)
-	.type("bar")
-	.id("name")
-	.x("year")
-	.y("Lost < 1 <<-->> Win > 1")
-	.draw()
-
-};
-
-
-
-
 
